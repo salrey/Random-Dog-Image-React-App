@@ -6,16 +6,36 @@ class Dog extends React.Component {
         this.state = {
           imgURL: ""
         };
-      }
+    }
+
+    getRandomImage = () => {
+        fetch("https://dog.ceo/api/breeds/image/random")
+          .then((response) => response.json())
+          .then((json) => {
+            this.setState({
+              imgURL: json.message,
+            });
+          })
+          .catch((err) => {
+            console.log("error fetching image");
+          });
+    };
       
-  render() {
-    return (
-      <>
-        <p>IMAGE PLACEHOLDER</p>
-        <button>Load new Dog</button>
-      </>
-    );
-  }
+    componentDidMount() {
+        this.getRandomImage();
+    }
+      
+      
+    render() {
+        const { imgURL } = this.state;
+
+        return (
+            <>
+                <img alt="Dog" src={imgURL} />
+                <button onClick={this.getRandomImage}>Load new dog</button>   
+            </>
+        );
+    }      
 }
 
 export default Dog;
