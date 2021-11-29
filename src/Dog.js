@@ -28,10 +28,15 @@ class Dog extends React.Component {
       
     render() {
         const { imgURL } = this.state;
+        const styles = {
+            img: {
+              height: "15em"
+            }
+        };
 
         return (
             <>
-                <img alt="Dog" src={imgURL} />
+                <img style={styles.img} alt="Dog" src={imgURL} />
                 <button onClick={this.getRandomImage}>Load new dog</button>   
             </>
         );
